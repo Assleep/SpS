@@ -17,7 +17,7 @@ import static javax.swing.GroupLayout.Alignment.BASELINE;
 import static javax.swing.GroupLayout.Alignment.LEADING;
 
 public class Main {
-    private static final double VERSION = 3.3;
+    private static final double VERSION = 3.4;
     private static double newVersion;
     private static Thread update_thread;
 
