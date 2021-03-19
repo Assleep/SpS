@@ -117,7 +117,7 @@ public class Main {
             for(Element element : elements){
                 if(element.absUrl("href").indexOf("versions") != -1){
                     newVersion = parseDouble(element.absUrl("href").substring(element.absUrl("href").lastIndexOf("V")+1,element.absUrl("href").length()-4));
-                    if(VERSION == newVersion) return false;
+                    if(VERSION >= newVersion) return false;
                 }
             }
         } catch (IOException e) {
