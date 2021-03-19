@@ -28,7 +28,7 @@ public class Main {
             SwingUtilities.invokeLater(new Runnable() {
                 @Override
                 public void run() {
-                    JFrame frame = new JFrame();
+                    JFrame frame = new JFrame("SPS Update");
                     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                     frame.setSize(250, 140);
                     frame.setLocationRelativeTo(null);

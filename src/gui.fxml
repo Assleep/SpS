@@ -3,9 +3,7 @@
 <?import java.lang.*?>
 <?import javafx.collections.*?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.effect.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
 <Pane prefHeight="592.0" prefWidth="872.0" style="-fx-background-color: #EEEEEE;" stylesheets="/styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
@@ -28,7 +26,8 @@
                 <font>
                     <Font size="14.0" />
                 </font></Label>
-            <TextField fx:id="inputPath" layoutX="15.0" layoutY="22.0" prefHeight="28.0" prefWidth="248.0" promptText="Path to directory" style="-fx-border-width: 0px 0px 2px 0px; -fx-border-color: #3E51FF; -fx-background-color: #fff;" />
+            <TextField fx:id="inputPath" layoutX="64.0" layoutY="22.0" prefHeight="28.0" prefWidth="185.0" promptText="Path to directory" style="-fx-border-width: 0px 0px 2px 0px; -fx-border-color: #3E51FF; -fx-background-color: #fff;" />
+            <ComboBox fx:id="roots" layoutX="12.0" layoutY="23.0" prefHeight="25.0" prefWidth="60.0" style="-fx-background-color: #fff; -fx-border-color: #3E51FF; -fx-border-width: 0 0 2px 0;" />
         </children></Pane>
     <Button id="btnCancel" fx:id="btnCancel" cancelButton="true" layoutX="14.0" layoutY="198.0" mnemonicParsing="false" onAction="#cancelAction" prefHeight="72.0" prefWidth="278.0" style="-fx-background-color: #FF493E; -fx-background-radius: 28px;" text="Cancel" textFill="WHITE">
         <font>

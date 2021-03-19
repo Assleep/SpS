@@ -42,11 +42,20 @@ public class MainController {
     @FXML
     private ComboBox extensionList;
     @FXML
+    private ComboBox roots;
+    @FXML
     private TableView tableView;
     private Thread thread;
 
     @FXML
     void initialize(){
+        ObservableList<String> list_root = FXCollections.observableArrayList();
+        File[] local_roots = File.listRoots();
+        for (File file: local_roots) {
+            list_root.add(file.getAbsolutePath());
+        }
+        roots.setItems(list_root);
+        roots.setValue(list_root.get(0));
         TableColumn<Map.Entry<String, Integer>, Integer> numberColumn = new TableColumn<>("Number of entries");
         numberColumn.setCellValueFactory((p) -> {
             return new ReadOnlyObjectWrapper<>(p.getValue().getValue());
@@ -89,7 +98,7 @@ public class MainController {
             if (extensionList.getValue() == (null)) {
                 extensionList.setValue("pptx");
             }
-            Task task = new AnswerWorker(inputPath.getText(), extensionList.getValue().toString(), inputWord.getText());
+            Task task = new AnswerWorker(roots.getValue()+inputPath.getText(), extensionList.getValue().toString(), inputWord.getText());
             thread = new Thread(task);
             thread.start();
             tableView.getItems().clear();
