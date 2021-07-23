@@ -1,0 +1,15 @@
+<component name="ArtifactManager">
+  <artifact name="FileWorker:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/FileWorker_jar</output-path>
+    <root id="root">
+      <element id="archive" name="FileWorker.jar">
+        <element id="module-output" name="FileWorker" />
+        <element id="library" level="project" name="org.jsoup:jsoup:1.13.1" />
+        <element id="library" level="project" name="org.apache.poi:poi:4.1.1" />
+        <element id="library" level="project" name="org.apache.poi:poi-ooxml:4.1.1" />
+        <element id="library" level="application" name="javafx-swt" />
+        <element id="library" level="project" name="com.ibm.icu:icu4j:68.2" />
+      </element>
+    </root>
+  </artifact>
+</component>

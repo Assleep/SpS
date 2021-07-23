@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.collections.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<Pane prefHeight="592.0" prefWidth="872.0" style="-fx-background-color: #EEEEEE;" stylesheets="/resources/styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+    <Pane layoutX="14.0" layoutY="22.0" prefHeight="162.0" prefWidth="278.0" style="-fx-background-color: white; -fx-background-radius: 28px;" styleClass="pane">
+        <children>
+            <ComboBox fx:id="extensionList" layoutX="162.0" layoutY="62.0" prefHeight="28.0" prefWidth="102.0" promptText="Extension" style="-fx-background-color: #fff; -fx-border-color: #3E51FF; -fx-border-width: 0px 0px 2px 0px;">
+                <items>
+                    <FXCollections fx:factory="observableArrayList">
+                        <String fx:value="All files" />
+                        <String fx:value="pptx" />
+                        <String fx:value="docx" />
+                        <String fx:value="xlsx" />
+                        <String fx:value="txt" />
+                    </FXCollections>
+                </items>
+            </ComboBox>
+            <TextField fx:id="inputWord" layoutX="15.0" layoutY="62.0" prefHeight="28.0" prefWidth="139.0" promptText="Word or phrase to find" style="-fx-background-color: #fff; -fx-border-color: #3E51FF; -fx-border-width: 0px 0px 2px 0px;" />
+            <ProgressIndicator id="progressIndicator" fx:id="progressIndicator" layoutX="15.0" layoutY="111.0" prefHeight="35.0" prefWidth="35.0" visible="false" />
+            <Label fx:id="labelTip" layoutX="83.0" layoutY="113.0" prefHeight="35.0" prefWidth="170.0" textAlignment="CENTER" textFill="#ff493e">
+                <font>
+                    <Font size="14.0" />
+                </font></Label>
+            <TextField fx:id="inputPath" layoutX="64.0" layoutY="22.0" prefHeight="28.0" prefWidth="185.0" promptText="Path to directory" style="-fx-border-width: 0px 0px 2px 0px; -fx-border-color: #3E51FF; -fx-background-color: #fff;" />
+            <ComboBox fx:id="roots" layoutX="12.0" layoutY="23.0" prefHeight="25.0" prefWidth="60.0" style="-fx-background-color: #fff; -fx-border-color: #3E51FF; -fx-border-width: 0 0 2px 0;" />
+        </children></Pane>
+    <Button id="btnCancel" fx:id="btnCancel" cancelButton="true" layoutX="14.0" layoutY="198.0" mnemonicParsing="false" onAction="#cancelAction" prefHeight="72.0" prefWidth="278.0" style="-fx-background-color: #FF493E; -fx-background-radius: 28px;" text="Cancel" textFill="WHITE">
+        <font>
+            <Font size="18.0" />
+        </font></Button>
+    <Button id="btnFind" fx:id="btnFind" defaultButton="true" layoutX="14.0" layoutY="198.0" onAction="#findAction" prefHeight="72.0" prefWidth="278.0" style="-fx-background-color: #3E51FF; -fx-background-radius: 28px;" text="Find" textFill="WHITE">
+        <font>
+            <Font size="18.0" />
+        </font></Button>
+    <Pane layoutX="312.0" layoutY="22.0" prefHeight="548.0" prefWidth="546.0" style="-fx-background-radius: 28px; -fx-background-color: #fff;" styleClass="pane">
+        <children>
+            <TableView fx:id="tableView" layoutX="16.0" layoutY="15.0" prefHeight="518.0" prefWidth="516.0" style="-fx-background-color: rgba(255, 255, 255, 0);">
+            </TableView>
+        </children>
+    </Pane>
+</Pane>

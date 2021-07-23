@@ -1,0 +1,49 @@
+
+
+.table-view .column-header-background {.table-view .column-header,
+                                       .table-view .column-header .filler,
+                                       .table-view .column-header-background .filler {
+                                           -fx-background-color: white;
+                                           -fx-border-width: 0;
+                                       }
+    -fx-background-color: rgba(0, 0, 0, 0);
+    -fx-border-width: 0 0 2 0;
+    -fx-border-color: #EEEEEE;
+}
+
+.table-view .column-header .label {
+    -fx-alignment: center_left;
+}
+
+.table-row-cell,
+.table-row-cell:odd {
+    -fx-background-color: white;
+}
+
+.table-row-cell:hover {
+   -fx-border-color:  #3E51FF;
+}
+
+.table-view .table-cell {
+    -fx-border-color: #EEEEEE;
+    -fx-border-width: 1px;
+}
+#btnFind, #btnCancel, .pane{
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.4), 15, 0, 0, 0);
+}
+#list_drive_item{
+    -fx-padding: 30px 20px 30px 0px;
+}
+#combo_box{
+    -fx-padding: 0px 10px 0px 10px;
+    -fx-border-insets: 0px 10px 0px 10px;
+    -fx-background-insets: 0px 10px 0px 10px;
+}
+
+#btnFind:hover, #btnCancel:hover{
+    -fx-effect: none;
+}
+.progress-indicator:indeterminate > .spinner {
+    -fx-accent: #3E51FF;
+}
+
