@@ -2,7 +2,6 @@ package ru.saiushev.sps.utils;
 
 import java.io.*;
 import org.apache.poi.extractor.POITextExtractor;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ooxml.POIXMLDocumentPart;
 import org.apache.poi.sl.extractor.SlideShowExtractor;
 import org.apache.poi.ss.usermodel.Cell;
@@ -119,85 +118,6 @@ public class Parser {
             allTextInSlide.append(allTextContentInSlideShow);
             return TextAnalyzerUtil.getNumOfEntries(allTextInSlide.toString(), word);
         } catch (IOException | XmlException e) {
-            e.printStackTrace();
-        }
-        return 0;
-    }
-    // In early development
-    public static Integer parsePPT(File file, String word){
-        try {
-            XMLSlideShow ppt = new XMLSlideShow(new FileInputStream(file));
-            SlideShowExtractor<XSLFShape, XSLFTextParagraph> slideShowExtractor = new SlideShowExtractor<XSLFShape, XSLFTextParagraph>(ppt);
-            StringBuilder allTextInSlide = new StringBuilder("");
-
-            slideShowExtractor.setCommentsByDefault(true);
-            slideShowExtractor.setMasterByDefault(true);
-            slideShowExtractor.setNotesByDefault(true);
-            slideShowExtractor.setSlidesByDefault(true);
-
-            StringBuilder sb = new StringBuilder();
-            for (XSLFSlide slide : ppt.getSlides()) {
-                for (POIXMLDocumentPart part : slide.getRelations()) {
-                    if (part.getPackagePart().getPartName().getName().startsWith("/ppt/diagrams/data")) {
-                        XmlCursor cursor = XmlObject.Factory.parse(part.getPackagePart().getInputStream()).newCursor();
-                        while (cursor.hasNextToken()) {
-                            if (cursor.isText()) {
-                                sb.append(cursor.getTextValue() + "\r\n");
-                            }
-                            cursor.toNextToken();
-                        }
-                    }
-                }
-            }
-
-            String allTextContentInSlideShow = slideShowExtractor.getText();
-            POITextExtractor textExtractor = slideShowExtractor.getMetadataTextExtractor();
-            String metaData = textExtractor.getText();
-
-            String allTextContentInDiagrams = sb.toString();
-            allTextInSlide.append(allTextContentInDiagrams+" ");
-            allTextInSlide.append(metaData+" ");
-            allTextInSlide.append(allTextContentInSlideShow);
-            return TextAnalyzerUtil.getNumOfEntries(allTextInSlide.toString(), word);
-        } catch (IOException | XmlException e) {
-            e.printStackTrace();
-        }
-        return 0;
-    }
-    public static Integer parseXLS(File file, String word){
-        try {
-            HSSFWorkbook wb = new HSSFWorkbook(new FileInputStream(file));
-            StringBuilder allTextInXLS = new StringBuilder();
-
-            for(int i = 0; i < wb.getNumberOfSheets(); i++){
-                Sheet sheet = wb.getSheetAt(i);
-                allTextInXLS.append(sheet.getSheetName());
-                Iterator<Row> it = sheet.iterator();
-                while(it.hasNext()){
-                    Row row = it.next();
-                    Iterator<Cell> cells = row.cellIterator();
-                    while(cells.hasNext()){
-                        Cell cell = cells.next();
-                        CellType cellType = cell.getCellType();
-                        switch(cellType){
-                            case NUMERIC:
-                                allTextInXLS.append(cell.getNumericCellValue()+" ");
-                                break;
-                            case STRING:
-                                allTextInXLS.append(cell.getStringCellValue()+" ");
-                                break;
-                            case FORMULA:
-                                allTextInXLS.append(cell.getCellFormula()+" ");
-                                break;
-                            default:
-                                break;
-                        }
-                    }
-                }
-            }
-            return TextAnalyzerUtil.getNumOfEntries(allTextInXLS.toString(), word);
-
-        } catch (IOException e) {
             e.printStackTrace();
         }
         return 0;

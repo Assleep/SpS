@@ -13,20 +13,12 @@ import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
-import javafx.util.Callback;
-import ru.saiushev.sps.utils.AnswerWorker;
+import ru.saiushev.sps.utils.AnswerTask;
 
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.security.GeneralSecurityException;
 import java.util.Map;
 
 public class MainController {
@@ -101,7 +93,7 @@ public class MainController {
             if (extensionList.getValue() == (null)) {
                 extensionList.setValue("pptx");
             }
-            Task task = new AnswerWorker(roots.getValue()+inputPath.getText(), extensionList.getValue().toString(), inputWord.getText());
+            Task task = new AnswerTask(roots.getValue()+inputPath.getText(), extensionList.getValue().toString(), inputWord.getText());
             thread = new Thread(task);
             thread.start();
             tableView.getItems().clear();
