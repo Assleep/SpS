@@ -17,7 +17,6 @@ import java.util.Properties;
 public class ApplicationRunner extends Application {
     public static Scene primaryScene;
     public static String DIR_TO_SAVE;
-    private Properties settings;
     public void launch(){
         Application.launch();
     }
@@ -32,16 +31,15 @@ public class ApplicationRunner extends Application {
         primaryScene = new Scene(root);
 
         Properties defaultSettings = new Properties();
-        defaultSettings.put("download_directory", Paths.get(System.getProperty("user.home")+"\\Downloads\\files_buffer").toString());
-        settings = new Properties(defaultSettings);
+        defaultSettings.put("download_directory", Paths.get(System.getProperty("user.home")+"\\Downloads\\Sps").toString());
+        Properties settings = new Properties(defaultSettings);
         DIR_TO_SAVE = settings.getProperty("download_directory");
 
-        File propDir = new File(System.getProperty("user.home"), ".fileworker");
+        File propDir = new File(System.getProperty("user.home"), ".sps");
         if(!propDir.exists()) propDir.mkdir();
 
         File propFile = new File(propDir, "program.properties");
         if(propFile.exists()){
-            System.out.println("Getting properties from file");
             try{
                 FileInputStream in = new FileInputStream(propFile);
                 settings.load(in);
@@ -51,7 +49,7 @@ public class ApplicationRunner extends Application {
             }
         }
         if(!Files.exists(Paths.get(DIR_TO_SAVE))){
-            Files.createDirectory(Paths.get(System.getProperty("user.home")+"\\Downloads\\files_buffer"));
+            Files.createDirectory(Paths.get(System.getProperty("user.home")+"\\Downloads\\Sps"));
         }
         try{
             FileOutputStream out = new FileOutputStream(propFile);
