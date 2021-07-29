@@ -19,7 +19,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Iterator;
 
-public class Parser {
+public class DocumentParser {
     public static Integer parseDOCX(File file, String word){
         try{
             XWPFDocument docx = new XWPFDocument(new FileInputStream(file));

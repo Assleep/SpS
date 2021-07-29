@@ -84,42 +84,31 @@ public class MainController {
 
     @FXML
     private void findAction() throws IOException {
-        if ("".equals(inputPath.getText()) || "".equals(inputWord.getText())) {
+        String path = roots.getValue()+inputPath.getText().trim().replaceAll("[\\s]", "");
+        String word = inputWord.getText().trim();
+        if(path.isEmpty() || word.isEmpty()){
             labelTip.setText("Write a path and a word!");
-        } else {
+        }else{
             labelTip.setText("");
             changeButton(false);
             progressIndicator.setVisible(true);
-            if (extensionList.getValue() == (null)) {
-                extensionList.setValue("pptx");
-            }
-            Task task = new AnswerTask(roots.getValue()+inputPath.getText(), extensionList.getValue().toString(), inputWord.getText());
+
+            Task<Map<String, Integer>> task = new AnswerTask(path, extensionList.getValue() == null ? "pptx" : extensionList.getValue().toString(), word);
             thread = new Thread(task);
             thread.start();
             tableView.getItems().clear();
-            task.addEventHandler(WorkerStateEvent.WORKER_STATE_SUCCEEDED, new EventHandler<WorkerStateEvent>() {
-                @Override
-                public void handle(WorkerStateEvent workerStateEvent) {
-                    Map<String, Integer> result = (Map<String, Integer>) task.getValue();
-                    result.entrySet().stream().sorted(Map.Entry.<String, Integer>comparingByValue().reversed()).forEach(x -> {
-                        if(x.getValue() != 0){
-                            tableView.getItems().add(x);
-                        }
-                    });
-                    changeButton(true);
-                }
+            task.addEventHandler(WorkerStateEvent.WORKER_STATE_SUCCEEDED, workerStateEvent -> {
+                task.getValue().entrySet().stream().sorted(Map.Entry.<String, Integer>comparingByValue().reversed()).forEach(x -> {
+                    if(x.getValue() != 0){
+                        tableView.getItems().add(x);
+                    }
+                });
+                changeButton(true);
             });
-            task.addEventHandler(WorkerStateEvent.WORKER_STATE_FAILED, new EventHandler<WorkerStateEvent>() {
-                @Override
-                public void handle(WorkerStateEvent workerStateEvent) {
-                    String result = task.getException().getMessage();
-                    Platform.runLater(new Runnable() {
-                        @Override public void run() {
-                            labelTip.setText(result);
-                        }
-                    });
-                    changeButton(true);
-                }
+            task.addEventHandler(WorkerStateEvent.WORKER_STATE_FAILED, workerStateEvent -> {
+                String result = task.getException().getMessage();
+                Platform.runLater(() -> labelTip.setText(result));
+                changeButton(true);
             });
         }
     }
@@ -132,8 +121,6 @@ public class MainController {
     public void changeButton(Boolean isVisible){
         btnFind.setVisible(isVisible);
         btnCancel.setVisible(!isVisible);
-        if(isVisible){
-            progressIndicator.setVisible(false);
-        }
+        progressIndicator.setVisible(!isVisible);
     }
 }

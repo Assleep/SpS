@@ -59,16 +59,16 @@ public class AnswerTask extends Task<Map<String, Integer>> {
     private void extensionDef(File f){
         switch(f.getName().substring(f.getName().lastIndexOf(".") + 1)){
             case "pptx":
-                map.put(f.getPath(), Parser.parsePPTX(f, word));
+                map.put(f.getPath(), DocumentParser.parsePPTX(f, word));
                 break;
             case "docx":
-                map.put(f.getPath(), Parser.parseDOCX(f, word));
+                map.put(f.getPath(), DocumentParser.parseDOCX(f, word));
                 break;
             case "txt":
-                map.put(f.getPath(), Parser.parseTXT(f, word));
+                map.put(f.getPath(), DocumentParser.parseTXT(f, word));
                 break;
             case "xlsx":
-                map.put(f.getPath(), Parser.parseXLSX(f, word));
+                map.put(f.getPath(), DocumentParser.parseXLSX(f, word));
                 break;
             default:
                 break;
